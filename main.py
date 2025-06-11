@@ -1,6 +1,6 @@
-# Example code for (GY-521) MPU6050 Accelerometer/Gyro Module
+# Modified from example code for (GY-521) MPU6050 Accelerometer/Gyro Module
 # Write in MicroPython by Warayut Poomiwatracanont JAN 2023
-
+# Base Code: https://github.com/Lezgend/MPU6050-MicroPython/blob/main/main.py
 from MPU6050 import MPU6050
 
 from os import listdir, chdir
