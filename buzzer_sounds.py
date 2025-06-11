@@ -11,31 +11,42 @@ def play_tone(freq, duration):
     time.sleep_ms(duration)
     buzzer.duty_u16(0)
 
-def shook_sound():
-    # Scared/anxious: rapid, dissonant jumps
-    freq_sequence = [700, 750, 680, 720, 690, 740]
-    duration_per_tone = 30  # ms
-    for freq in freq_sequence:
-        play_tone(freq, duration_per_tone)
-
-def angry_sound():
-    # Pokémon villain: short, descending, menacing
-    notes = [880, 830, 780]
-    duration_per_note = 50  # ms
+def happy_sound():
+    # Bright, cheerful, and smooth for piezo buzzers
+    notes = [2093, 2637, 3136, 3520, 3951]  # C7, E7, G7, A7, B7
+    duration_per_note = 22  # ms
     for note in notes:
         play_tone(note, duration_per_note)
 
-def happy_sound():
-    # Short, cheerful
-    notes = [440, 550]
-    duration_per_note = 25  # ms
+def angry_sound():
+    """
+    Angrier rapid, harsh descending melody with dissonant intervals.
+    """
+    notes = [1568, 1397, 1319, 1175, 1109, 1047, 1245]  # G6, F6, E6, D6, C#6, C6, D#6 (dissonant end)
+    duration_per_note = 50  # ms for fast, aggressive feel
+    for note in notes:
+        play_tone(note, duration_per_note)
+
+def shook_sound():
+    """
+    Anxious, trembling effect: rapid, dissonant jumps in the same range as angry_sound.
+    Designed as a companion, with a zig-zag and stuttery feel.
+    """
+    notes = [1568, 1319, 1568, 1397, 1245, 1397, 1175, 1319]  # G6, E6, G6, F6, D#6, F6, D6, E6
+    duration_per_note = 22  # ms for a jittery, nervous effect
     for note in notes:
         play_tone(note, duration_per_note)
 
 def headpat_sound():
     # Distinct, happy, short upward chirp (like a "ding!")
-    notes = [660, 880]  # E5, A5
-    duration_per_note = 35  # ms
+    notes = [1319, 1397, 1568, 1760, 2093]  # E6, F6, G6, A6, C7
+    duration_per_note = 40  # ms
+    for note in notes:
+        play_tone(note, duration_per_note)
+        
+def click_sound():
+    notes = [2500, 3500]
+    duration_per_note = 40  # ms
     for note in notes:
         play_tone(note, duration_per_note)
 
