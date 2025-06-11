@@ -14,8 +14,8 @@ move_val = 0 # Track shake value
 fragile = 2 # Number of shakes the buddy can handle
 
 # Touch Definitions
-capacitiveValue = 300
-touch_threshold = 150 # Touch threshold to be adjusted
+capacitiveValue = 500
+touch_threshold = 250 # Touch threshold to be adjusted
 touch_pin = TouchPad(Pin(13))
 headpat_val = 0 # Track value for headpats
 headpat_threshold = 3
