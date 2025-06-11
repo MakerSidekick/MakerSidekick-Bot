@@ -32,6 +32,13 @@ def happy_sound():
     for note in notes:
         play_tone(note, duration_per_note)
 
+def headpat_sound():
+    # Distinct, happy, short upward chirp (like a "ding!")
+    notes = [660, 880]  # E5, A5
+    duration_per_note = 35  # ms
+    for note in notes:
+        play_tone(note, duration_per_note)
+
 def startup_sound():
     # quick, bright, and welcoming arpeggio
     notes = [523, 659, 784, 1047]

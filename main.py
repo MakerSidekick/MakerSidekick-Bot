@@ -6,7 +6,7 @@ from MPU6050 import MPU6050
 from os import listdir, chdir
 from machine import TouchPad, Pin
 from time import sleep_ms
-from buzzer_sounds import startup_sound, happy_sound, angry_sound, shook_sound
+from buzzer_sounds import startup_sound, happy_sound, angry_sound, shook_sound, headpat_sound
 
 # Movement Definitions
 mpu = MPU6050()
@@ -62,11 +62,10 @@ while True:
     capacitiveValue = touch_pin.read()
     if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
-        happy_sound()
+        headpat_sound()
         headpat_val += 1
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
-        happy_sound()
         happy_sound()
         happy_sound()
         headpat_val = 0
