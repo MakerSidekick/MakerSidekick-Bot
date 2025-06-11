@@ -29,3 +29,7 @@ GND -> Buzzer Terminal
 > [!TIP]
 > (You can change buzzer pin in file buzzer_sounds.py line 4)
 
+Pin assignment for ESP32 and Touch Pin:\
+GPIO 13 -> Metal Contact
+> [!TIP]
+> (You can change buzzer pin in file main.py line 19)
