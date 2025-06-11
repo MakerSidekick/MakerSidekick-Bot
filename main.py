@@ -55,10 +55,10 @@ while True:
     
     # Touch Pins
     capacitiveValue = touch_pin.read()
-    if capacitiveValue < touch_threshold:
+    if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
         headpat_val += 1
-    if headpat_val > headpat_threshold:
+    if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
         headpat_val = 0
         continue
