@@ -13,9 +13,15 @@ Future home for the project: https://github.com/sounddrill31/Social-Buddy/\
 Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
 
 ## Wiring
-Pin assignment for ESP32:\
+Pin assignment for ESP32 and MPU6050:\
 VCC -> 3v3\
+GND -> GND\
 SCL -> GPIO 22\
 SDA -> GPIO 21\
-\
-(You can change SCL pin and SDA pin in file MPU6050.py line 73)
+
+Pin assignment for ESP32 and Buzzer:\
+GPIO 32 -> Buzzer Terminal\
+GND -> Buzzer Terminal\
+(You can change SCL pin and SDA pin in file MPU6050.py line 73)\
+(You can change buzzer pin in file buzzer_sounds.py line 4)
+

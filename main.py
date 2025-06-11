@@ -4,8 +4,9 @@
 from MPU6050 import MPU6050
 
 from os import listdir, chdir
-from machine import TouchPad,Pin
+from machine import TouchPad, Pin
 from time import sleep_ms
+from buzzer_sounds import startup_sound, happy_sound, angry_sound, shook_sound
 
 # Movement Definitions
 mpu = MPU6050()
@@ -20,6 +21,7 @@ headpat_val = 0 # Track value for headpats
 headpat_threshold = 3
 
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
+startup_sound()
 
 while True:    
     # Accelerometer Data
@@ -45,13 +47,16 @@ while True:
     mul_gforce = gforce * 1000 # make the tiny value more pronounced by multiplying with 1000
     print("G-Force: " + str(gforce))
     print("Multiplied G-Force:" + str(mul_gforce))
-    if mul_gforce >= 3000: # sudden frequent movement
+    if mul_gforce >= 2500: # sudden frequent movement
         move_val+=1
+        angry_sound()
     if mul_gforce <= 1500: # not moved in a while 
         move_val=0
     if move_val >= fragile: # check if we've exceeded the fragile threshold
         print("I'm shook! I'm dizzy! (⸝⸝๑﹏๑⸝⸝)")
-        break
+        shook_sound()
+        #break
+        continue
     
     # Touch Pins
     capacitiveValue = touch_pin.read()
@@ -60,6 +65,7 @@ while True:
         headpat_val += 1
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
+        happy_sound()
         headpat_val = 0
         continue
 
