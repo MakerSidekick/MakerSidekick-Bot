@@ -20,9 +20,12 @@ GND -> GND\
 SCL -> GPIO 22\
 SDA -> GPIO 21
 
+> [!TIP]
+> (You can change SCL pin and SDA pin in file MPU6050.py line 73)
+
 Pin assignment for ESP32 and Buzzer:\
 GPIO 32 -> Buzzer Terminal\
-GND -> Buzzer Terminal\
-(You can change SCL pin and SDA pin in file MPU6050.py line 73)\
-(You can change buzzer pin in file buzzer_sounds.py line 4)
+GND -> Buzzer Terminal
+> [!TIP]
+> (You can change buzzer pin in file buzzer_sounds.py line 4)
 
