@@ -5,11 +5,15 @@ buzzer_pin = 32  # Change to your actual buzzer pin
 buzzer = PWM(Pin(buzzer_pin))
 buzzer.duty_u16(0) # 0% duty cycle, no output
 
+led = Pin(2, Pin.OUT)
+
 def play_tone(freq, duration):
+    led.value(1)
     buzzer.freq(freq)
     buzzer.duty_u16(32768)  # 50% duty cycle
     time.sleep_ms(duration)
     buzzer.duty_u16(0)
+    led.value(0)
 
 def happy_sound():
     # Bright, cheerful, and smooth for piezo buzzers
