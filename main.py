@@ -1,4 +1,4 @@
-# Modified from example code for (GY-521) MPU6050 Accelerometer/Gyro Module
+# Example code for (GY-521) MPU6050 Accelerometer/Gyro Module
 # Write in MicroPython by Warayut Poomiwatracanont JAN 2023
 # Base Code: https://github.com/Lezgend/MPU6050-MicroPython/blob/main/main.py
 from MPU6050 import MPU6050
@@ -56,7 +56,7 @@ while True:
         print("I'm shook! I'm dizzy! (⸝⸝๑﹏๑⸝⸝)")
         shook_sound()
         #break
-        continue
+        #continue
     
     # Touch Pins
     capacitiveValue = touch_pin.read()
@@ -64,6 +64,7 @@ while True:
         print("State Happy ( ˶ˆᗜˆ˵ )")
         happy_sound()
         headpat_val = 0
+        sleep_ms(10)
         continue
     if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
