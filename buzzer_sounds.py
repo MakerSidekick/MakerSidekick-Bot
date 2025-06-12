@@ -58,7 +58,7 @@ def startup_sound_main():
         play_tone(note, dur)
 
 def startup_sequence():
-    time.sleep_ms(500)
+    time.sleep_ms(50)
     click_sound()
     time.sleep_ms(150)
     startup_sound_main()
@@ -72,7 +72,6 @@ def startup_sequence():
 
 # For testing, only when run as the same file
 if __name__ == "__main__":
-    time.sleep_ms(500)
     startup_sequence()
     time.sleep_ms(500)
     happy_sound()
