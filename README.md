@@ -29,7 +29,12 @@ GND -> Buzzer Terminal
 > [!TIP]
 > (You can change buzzer pin in file buzzer_sounds.py line 4)
 
-Pin assignment for ESP32 and Touch Pin:\
+Pin assignment for ESP32 and Touch Pin(For registering headpats):\
 GPIO 13 -> Metal Contact
 > [!TIP]
 > (You can change buzzer pin in file main.py line 19)
+
+Pin assignment for ESP32 to Disable Pin(To stop code execution, for debugging):\
+GPIO 12 -> GND
+> [!TIP]
+> (You can change buzzer pin in file main.py line 20)
