@@ -6,7 +6,7 @@ from MPU6050 import MPU6050
 from os import listdir, chdir
 from machine import TouchPad, Pin
 from time import sleep_ms
-from buzzer_sounds import startup_sound, happy_sound, angry_sound, shook_sound, headpat_sound
+from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound
 
 # Movement Definitions
 mpu = MPU6050()
@@ -21,7 +21,7 @@ headpat_val = 0 # Track value for headpats
 headpat_threshold = 3
 
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
-startup_sound()
+startup_sequence()
 
 while True:    
     # Accelerometer Data

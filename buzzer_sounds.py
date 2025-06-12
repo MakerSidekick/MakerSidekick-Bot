@@ -50,16 +50,25 @@ def click_sound():
     for note in notes:
         play_tone(note, duration_per_note)
 
-def startup_sound():
+def startup_sound_main():
     # quick, bright, and welcoming arpeggio
     notes = [523, 659, 784, 1047]
     duration_per_note = 50  # ms
     for note in notes:
         play_tone(note, duration_per_note)
 
+def startup_sequence():
+    time.sleep_ms(500)
+    click_sound()
+    startup_sound_main()
+    time.sleep_ms(15)
+    click_sound()
+    headpat_sound()
+    click_sound()
+
 # For testing, only when run as the same file
 if __name__ == "__main__":
-    startup_sound()
+    startup_sequence()
     time.sleep_ms(500)
     happy_sound()
     time.sleep_ms(500)
