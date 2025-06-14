@@ -1,6 +1,8 @@
-# Example code for (GY-521) MPU6050 Accelerometer/Gyro Module
-# Write in MicroPython by Warayut Poomiwatracanont JAN 2023
+# Based on Example code for (GY-521) MPU6050 Accelerometer/Gyro Module
+# Written in MicroPython by Warayut Poomiwatracanont JAN 2023
 # Base Code: https://github.com/Lezgend/MPU6050-MicroPython/blob/main/main.py
+# Current Project: https://github.com/MakerSidekick/MakerSidekick-Bot/blob/main/main.py
+
 from MPU6050 import MPU6050
 
 from os import listdir, chdir
@@ -24,7 +26,7 @@ headpat_threshold = 3
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
 startup_sequence()
 
-while True:    
+while True:
     # Accelerometer Data
     accel = mpu.read_accel_data() # read the accelerometer [ms^-2]
     aX = accel["x"]
@@ -38,7 +40,7 @@ while True:
     gY = gyro["y"]
     gZ = gyro["z"]
     print("x:" + str(gX) + " y:" + str(gY) + " z:" + str(gZ))
-    
+
     # Rough Temperature
     temp = mpu.read_temperature()   # read the device temperature [degC]
     print("Temperature: " + str(temp) + "°C")
@@ -58,7 +60,7 @@ while True:
         shook_sound()
         #break
         #continue
-    
+
     # Touch Pins
     capacitiveValue = touch_pin.read()
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
@@ -73,10 +75,10 @@ while True:
         headpat_val += 1
 
     print("\n")
-    
+
     if code_disable_pin.value() == 0:  # Returns 0 when grounded
         break # If pin 12 is grounded, kill the loop and allow finishing execution
     sleep_ms(1)
-    
+
     # Time Interval Delay in millisecond (ms)
     sleep_ms(200)
