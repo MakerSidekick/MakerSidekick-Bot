@@ -84,4 +84,4 @@ while True:
     sleep_ms(1)
 
     # Time Interval Delay in millisecond (ms)
-    sleep_ms(200)
+    sleep_ms(150)
