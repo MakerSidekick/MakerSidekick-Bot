@@ -37,5 +37,10 @@ def meter(state="add", current_value=35, ext_multiplier=1):
         result = current_value - delta
 
     print(f"Happiness {state} by {delta}! Current Value: ", result)
-
-    return result
+    
+    if result >= max_meter:
+        return max_meter # Value above maximum, return 100
+    elif result <= min_meter:
+        return min_meter # Value below minimum, return 0
+    else:
+        return result
