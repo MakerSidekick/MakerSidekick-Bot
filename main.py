@@ -16,8 +16,8 @@ move_val = 0 # Track shake value
 fragile = 2 # Number of shakes the buddy can handle
 
 # Touch Definitions
-capacitiveValue = 500
-touch_threshold = 250 # Touch threshold to be adjusted
+capacitiveValue = 0
+touch_threshold = 500 # Touch threshold to be adjusted
 touch_pin = TouchPad(Pin(13))
 code_disable_pin = Pin(12, Pin.IN, Pin.PULL_UP)
 headpat_val = 0 # Track value for headpats
@@ -63,6 +63,7 @@ while True:
 
     # Touch Pins
     capacitiveValue = touch_pin.read()
+    print("Touch Pin Capacitative Value: " + str(capacitiveValue))
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
         happy_sound()
