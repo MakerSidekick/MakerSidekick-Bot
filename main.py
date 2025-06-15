@@ -17,7 +17,7 @@ fragile = 2 # Number of shakes the buddy can handle
 
 # Touch Definitions
 capacitiveValue = 0
-touch_threshold = 500 # Touch threshold to be adjusted
+touch_threshold = 485 # Touch threshold to be adjusted
 touch_pin = TouchPad(Pin(13))
 code_enable_pin = Pin(12, Pin.IN, Pin.PULL_UP)
 enable_value = code_enable_pin.value()
@@ -26,7 +26,7 @@ enable_value = code_enable_pin.value()
 #enable_value = 0 # Pretend to ground it
 
 headpat_val = 0 # Track value for headpats
-headpat_threshold = 3
+headpat_threshold = 4
 
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
 startup_sequence()
@@ -74,12 +74,16 @@ while True:
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
         happy_sound()
+        sleep_ms(250)
+        happy_sound()
         headpat_val = 0
-        sleep_ms(10)
+        sleep_ms(1700)
         continue
     if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
+        sleep_ms(350)
         headpat_sound()
+        sleep_ms(450)
         headpat_val += 1
 
     print("\n")
