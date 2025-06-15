@@ -71,6 +71,7 @@ while True:
             Happy_value = 0 # Lose all trust, you've shaken me too many times!
             print("All Trust Lost!")
             print("Bot will shut down for 10 sec!")
+            print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
             sleep_ms(10000)
         #break
         continue
