@@ -19,7 +19,12 @@ fragile = 2 # Number of shakes the buddy can handle
 capacitiveValue = 0
 touch_threshold = 500 # Touch threshold to be adjusted
 touch_pin = TouchPad(Pin(13))
-code_disable_pin = Pin(12, Pin.IN, Pin.PULL_UP)
+code_enable_pin = Pin(12, Pin.IN, Pin.PULL_UP)
+enable_value = code_enable_pin.value()
+
+# To run code without Enable pin, uncomment the following lines:
+#enable_value = 0 # Pretend to ground it
+
 headpat_val = 0 # Track value for headpats
 headpat_threshold = 3
 
@@ -79,8 +84,8 @@ while True:
 
     print("\n")
 
-    if code_disable_pin.value() == 0:  # Returns 0 when grounded
-        break # If pin 12 is grounded, kill the loop and allow finishing execution
+    if enable_value != 0:  # Returns 0 when grounded
+        break # If pin 12 is not grounded, kill the loop and allow finishing execution
     sleep_ms(1)
 
     # Time Interval Delay in millisecond (ms)

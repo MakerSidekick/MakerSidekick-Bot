@@ -34,7 +34,8 @@ GPIO 13 -> Metal Contact
 > [!TIP]
 > (You can change touch pin in file main.py line 21)
 
-Pin assignment for ESP32 to Disable Pin(To stop code execution, for debugging):\
+Pin assignment for ESP32 to Enable Pin(To start code execution, for debugging):\
 GPIO 12 -> GND
 > [!TIP]
-> (You can change disable pin in file main.py line 22)
+> (You can change enable pin in file main.py line 22)
+If you want the code to run without enable pin, uncomment [main.py's line 26](main.py#L26)
