@@ -9,6 +9,7 @@ from os import listdir, chdir
 from machine import TouchPad, Pin
 from time import sleep_ms
 from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound
+from happy_meter import meter as get_happy
 
 # Movement Definitions
 mpu = MPU6050()
@@ -29,7 +30,9 @@ headpat_val = 0 # Track value for headpats
 headpat_threshold = 4
 
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
-startup_sequence()
+startup_sequence() #TODO: IMPLEMENT MUTE MODE
+
+Happy_value = 35 # Start default at 35
 
 while True:
     # Accelerometer Data
@@ -63,10 +66,14 @@ while True:
         shook_sound()
         #break
         continue
+    if 2000 < mul_gforce < 2500:
+        pass # TODO: Implement curious state, silent observer
     if mul_gforce >= 2500: # sudden frequent movement
         move_val+=1
-        angry_sound()
-        print("Whoa, what was that for! ヽ(｀Д´)ﾉ")
+        if Happy_value < 75: # if the bot is overall happy, it will endure assuming that this was a mistake but still become unhappy
+            angry_sound()
+            print("Whoa, what was that for! ヽ(｀Д´)ﾉ")
+        Happy_value = get_happy("reduce", Happy_value) # We're sad! Human shook us!
 
     # Touch Pins
     capacitiveValue = touch_pin.read()
@@ -77,12 +84,18 @@ while True:
         sleep_ms(250)
         happy_sound()
         headpat_val = 0
+        Happy_value = get_happy("add", Happy_value) # We're happy!
+
+        if Happy_value >= 75:
+            for i in range(3):
+                happy_sound() # It's really happy!
         sleep_ms(1700)
         continue
     if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
         sleep_ms(350)
         headpat_sound()
+        Happy_value = get_happy("add", Happy_value, 0.2) # We're a little happier!
         sleep_ms(450)
         headpat_val += 1
 
