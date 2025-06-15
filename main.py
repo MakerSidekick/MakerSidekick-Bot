@@ -72,6 +72,7 @@ while True:
             print("All Trust Lost!")
             print("Bot will shut down for 10 sec!")
             print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
+            shook_value = 0
             sleep_ms(10000)
         #break
         continue
@@ -94,6 +95,7 @@ while True:
         happy_sound()
         headpat_val = 0
         Happy_value = get_happy("add", Happy_value) # We're happy!
+        shook_value = 0
 
         if Happy_value >= 75:
             for i in range(3):
