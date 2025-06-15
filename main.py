@@ -50,16 +50,18 @@ while True:
     mul_gforce = gforce * 1000 # make the tiny value more pronounced by multiplying with 1000
     print("G-Force: " + str(gforce))
     print("Multiplied G-Force:" + str(mul_gforce))
-    if mul_gforce >= 2500: # sudden frequent movement
-        move_val+=1
-        angry_sound()
+       
     if mul_gforce <= 1500: # not moved in a while 
         move_val=0
     if move_val >= fragile: # check if we've exceeded the fragile threshold
         print("I'm shook! I'm dizzy! (⸝⸝๑﹏๑⸝⸝)")
         shook_sound()
         #break
-        #continue
+        continue
+    if mul_gforce >= 2500: # sudden frequent movement
+        move_val+=1
+        angry_sound()
+        print("Whoa, what was that for! ヽ(｀Д´)ﾉ")
 
     # Touch Pins
     capacitiveValue = touch_pin.read()
