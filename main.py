@@ -13,7 +13,9 @@ from happy_meter import meter as get_happy
 
 # Movement Definitions
 mpu = MPU6050()
-move_val = 0 # Track shake value
+move_val = 0 # Track sudden movement value
+shook_value = 0 # Track number of shakes
+shook_threshold = 7 # Exceed this and the buddy feels extremely distrustful
 fragile = 2 # Number of shakes the buddy can handle
 
 # Touch Definitions
@@ -32,7 +34,7 @@ headpat_threshold = 4
 print("Starting Up! (˶ᵔ ᵕ ᵔ˶)")
 startup_sequence() #TODO: IMPLEMENT MUTE MODE
 
-Happy_value = 35 # Start default at 35
+Happy_value = 35
 
 while True:
     # Accelerometer Data
@@ -64,6 +66,12 @@ while True:
     if move_val >= fragile: # check if we've exceeded the fragile threshold
         print("I'm shook! I'm dizzy! (⸝⸝๑﹏๑⸝⸝)")
         shook_sound()
+        shook_value += 1
+        if shook_value >= shook_threshold:
+            Happy_value = 0 # Lose all trust, you've shaken me too many times!
+            print("All Trust Lost!")
+            print("Bot will shut down for 10 sec!")
+            sleep_ms(10000)
         #break
         continue
     if 2000 < mul_gforce < 2500:
