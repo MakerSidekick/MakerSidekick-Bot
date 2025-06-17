@@ -13,6 +13,19 @@ Future home for the project: https://github.com/sounddrill31/Social-Buddy/
 
 Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
 
+## Modes
+### Normal Mode 
+<!-- Attach Pic -->
+Social Buddy, the Maker's Sidekick! It will react to surroundings 
+
+### Menu Mode 
+<!-- Attach Pic-->
+Select Options. Placeholder for now, it just blinks led 25 times
+
+Eventually will be able to launch user's custom code! 
+<!-- ### Custom Code Mode-->
+
+
 ## Wiring
 Pin assignment for ESP32 and MPU6050:\
 VCC -> 3v3\

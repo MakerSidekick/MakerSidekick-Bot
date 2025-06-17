@@ -10,7 +10,7 @@ from machine import TouchPad, Pin
 from time import sleep_ms
 from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound
 from happy_meter import meter as get_happy
-
+from menu import open_menu
 # Movement Definitions
 mpu = MPU6050()
 move_val = 0 # Track sudden movement value
@@ -69,11 +69,12 @@ while True:
         shook_value += 1
         if shook_value >= shook_threshold:
             Happy_value = 0 # Lose all trust, you've shaken me too many times!
-            print("All Trust Lost!")
-            print("Bot will shut down for 10 sec!")
+            print("All Trust Lost!") # In the future, this action will take us to menu
+            print("Bot will enter debug/menu mode!!")
             print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
             shook_value = 0
             sleep_ms(10000)
+            open_menu()
         #break
         continue
     if 2000 < mul_gforce < 2500:
