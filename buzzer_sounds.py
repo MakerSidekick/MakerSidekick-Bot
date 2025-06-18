@@ -70,6 +70,11 @@ def startup_sequence():
     time.sleep_ms(15)
     headpat_sound()
 
+def curious_scared_sound():
+    happy_sound()
+    time.sleep_ms(15)
+    shook_sound()
+
 # For testing, only when run as the same file
 if __name__ == "__main__":
     startup_sequence()

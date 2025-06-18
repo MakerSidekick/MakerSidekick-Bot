@@ -8,7 +8,7 @@ from MPU6050 import MPU6050
 from os import listdir, chdir
 from machine import TouchPad, Pin
 from time import sleep_ms
-from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound, startup_shush
+from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound, startup_shush, curious_scared_sound
 from happy_meter import meter as get_happy
 from menu import open_menu
 from pin_values import touch_pin_value, code_debug_pin_value
@@ -85,6 +85,9 @@ while True:
         if Happy_value < 75: # if the bot is overall happy, it will endure assuming that this was a mistake but still become unhappy
             angry_sound()
             print("Whoa, what was that for! ヽ(｀Д´)ﾉ")
+        else:
+            curious_scared_sound() # Bot trusts, but is still shaken
+            print("Whoa, are you taking me somewhere? Oo")
         Happy_value = get_happy("reduce", Happy_value) # We're sad! Human shook us!
 
     # Touch Pins
