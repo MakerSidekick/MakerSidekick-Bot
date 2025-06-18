@@ -109,7 +109,7 @@ while True:
         sleep_ms(350)
         headpat_sound()
         Happy_value = get_happy("add", Happy_value, 0.2) # We're a little happier!
-        sleep_ms(450)
+        sleep_ms(250)
         headpat_val += 1
 
     print("\n")
