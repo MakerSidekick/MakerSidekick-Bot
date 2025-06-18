@@ -18,10 +18,10 @@ def meter(state="add", current_value=35, ext_multiplier=1):
         print("Error!")
         return current_value
 
-    if current_value >= max_meter:
+    if current_value >= max_meter and state == "add":
         print("Current Value already at Maximum!")
         return max_meter # Value above maximum, return 100
-    elif current_value <= min_meter:
+    elif current_value <= min_meter and state == "reduce":
         print("Current Value already at Minimum!")
         return min_meter # Value below minimum, return 0
 
