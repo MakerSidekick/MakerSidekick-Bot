@@ -59,25 +59,16 @@ def click_sound():
     for note in notes:
         play_tone(note, duration_per_note)
 
-def startup_sound_main():
-    # Gentle, welcoming major arpeggio
-    notes = [1047, 1319, 1568, 2093]  # C6, E6, G6, C7
-    durations = [60, 60, 60, 90]  # Slightly longer last note for a soft finish
-    for note, dur in zip(notes, durations):
-        play_tone(note, dur)
-
 def startup_sequence():
-    time.sleep_ms(50)
-    click_sound()
-    time.sleep_ms(150)
-    startup_sound_main()
-    click_sound()
-    startup_sound_main()
-    time.sleep_ms(15)
     click_sound()
     time.sleep_ms(70)
-    headpat_sound()
     click_sound()
+    time.sleep_ms(15)
+    click_sound()
+    time.sleep_ms(35)
+    click_sound()
+    time.sleep_ms(15)
+    headpat_sound()
 
 # For testing, only when run as the same file
 if __name__ == "__main__":
