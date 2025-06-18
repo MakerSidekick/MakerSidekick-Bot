@@ -1,11 +1,16 @@
 from machine import Pin, PWM
 import time
 
-buzzer_pin = 32  # Change to your actual buzzer pin
-buzzer = PWM(Pin(buzzer_pin))
+from pin_values import buzzer_pin_value, led_pin_value
+
+buzzer = PWM(Pin(buzzer_pin_value))
 buzzer.duty_u16(0) # 0% duty cycle, no output
 
-led = Pin(2, Pin.OUT)
+led = Pin(led_pin_value, Pin.OUT)
+
+def startup_shush():
+    # Avoid random startup buzz
+    buzzer.duty_u16(0)
 
 def play_tone(freq, duration):
     led.value(1)

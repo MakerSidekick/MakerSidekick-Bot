@@ -8,9 +8,14 @@ from MPU6050 import MPU6050
 from os import listdir, chdir
 from machine import TouchPad, Pin
 from time import sleep_ms
-from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound
+from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound, startup_shush
 from happy_meter import meter as get_happy
 from menu import open_menu
+from pin_values import touch_pin_value, code_debug_pin_value
+
+# Silence the buzzer during startup
+startup_shush()
+
 # Movement Definitions
 mpu = MPU6050()
 move_val = 0 # Track sudden movement value
@@ -21,12 +26,8 @@ fragile = 2 # Number of shakes the buddy can handle
 # Touch Definitions
 capacitiveValue = 0
 touch_threshold = 485 # Touch threshold to be adjusted
-touch_pin = TouchPad(Pin(13))
-code_enable_pin = Pin(12, Pin.IN, Pin.PULL_UP)
-enable_value = code_enable_pin.value()
-
-# To run code without Enable pin, uncomment the following lines:
-#enable_value = 0 # Pretend to ground it
+touch_pin = TouchPad(Pin(touch_pin_value))
+code_debug_pin = Pin(code_debug_pin_value, Pin.IN, Pin.PULL_UP) # This is a button that can interrupt running program
 
 headpat_val = 0 # Track value for headpats
 headpat_threshold = 4
@@ -113,7 +114,7 @@ while True:
 
     print("\n")
 
-    if enable_value != 0:  # Returns 0 when grounded
+    if code_debug_pin.value() == 0:  # Returns 0 when grounded
         break # If pin 12 is not grounded, kill the loop and allow finishing execution
     sleep_ms(1)
 

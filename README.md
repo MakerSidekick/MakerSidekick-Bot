@@ -40,15 +40,15 @@ Pin assignment for ESP32 and Buzzer:\
 GPIO 32 -> Buzzer Terminal\
 GND -> Buzzer Terminal
 > [!TIP]
-> (You can change buzzer pin in file [buzzer_sounds.py line 4](buzzer_sounds.py#L4))
+> (You can change buzzer pin in file [pin_values.py line 6](pin_values.py#L6))
 
 Pin assignment for ESP32 and Touch Pin(For registering headpats):\
 GPIO 13 -> Metal Contact
 > [!TIP]
-> (You can change touch pin in file [main.py line 24](main.py#L24))
+> (You can change touch pin in file [pin_values.py line 4](pin_values.py#L4))
 
-Pin assignment for ESP32 to Enable Pin(To start code execution, for debugging):\
-GPIO 12 -> GND
+Pin assignment for ESP32 to Debug Pin(To start code execution, for debugging):\
+GPIO 14 -> GND
 > [!TIP]
-> (You can change enable pin in file [main.py line 25](main.py#L25))
-If you want the code to run without enable pin, uncomment [main.py's line 26](main.py#L26)
+> (You can change enable pin in file [pin_values.py line 5](pin_values.py#L5))
+If this button is pressed in main mode, it stops execution. If it is pressed in debug mode, it exits the menu and goes back to main mode. 
