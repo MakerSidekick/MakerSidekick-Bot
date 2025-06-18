@@ -74,8 +74,10 @@ while True:
             print("Bot will enter debug/menu mode!!")
             print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
             shook_value = 0
-            sleep_ms(10000)
+            sleep_ms(2500)
             open_menu()
+            startup_sequence() # Give the illusion of starting up again, since we're back from menu
+
         #break
         continue
     if 2000 < mul_gforce < 2500:
