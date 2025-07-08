@@ -6,7 +6,7 @@
 from MPU6050 import MPU6050
 
 from os import listdir, chdir
-from machine import TouchPad, Pin
+from machine import Pin, ADC#, TouchPad
 from time import sleep_ms
 from buzzer_sounds import startup_sequence, happy_sound, angry_sound, shook_sound, headpat_sound, startup_shush, curious_scared_sound
 from happy_meter import meter as get_happy
@@ -24,9 +24,12 @@ shook_threshold = 7 # Exceed this and the buddy feels extremely distrustful
 fragile = 2 # Number of shakes the buddy can handle
 
 # Touch Definitions
-capacitiveValue = 0
-touch_threshold = 485 # Touch threshold to be adjusted
-touch_pin = TouchPad(Pin(touch_pin_value))
+
+ADCtouchValue = 0
+touch_threshold = 1000 # Touch threshold to be adjusted
+#touch_pin = TouchPad(Pin(touch_pin_value))
+touch_pin = ADC(Pin(touch_pin_value))
+
 code_debug_pin = Pin(code_debug_pin_value, Pin.IN, Pin.PULL_UP) # This is a button that can interrupt running program
 
 headpat_val = 0 # Track value for headpats
@@ -62,24 +65,27 @@ while True:
     print("G-Force: " + str(gforce))
     print("Multiplied G-Force:" + str(mul_gforce))
        
-    if mul_gforce <= 1500: # not moved in a while 
+    if mul_gforce <= 1300: # moved suddenly 
         move_val=0
     if move_val >= fragile: # check if we've exceeded the fragile threshold
         print("I'm shook! I'm dizzy! (⸝⸝๑﹏๑⸝⸝)")
         shook_sound()
+        sleep_ms(150)
+        shook_sound()
+        sleep_ms(200)
         shook_value += 1
         if shook_value >= shook_threshold:
             Happy_value = 0 # Lose all trust, you've shaken me too many times!
-            print("All Trust Lost!") # In the future, this action will take us to menu
-            print("Bot will enter debug/menu mode!!")
-            print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
+            print("All Trust Lost! Bot is extremely dizzy...") # In the future, this action will take us to menu
+            #print("Bot will enter debug/menu mode!!")
+            #print("	┻━┻ ︵ヽ(`Д´)ﾉ︵ ┻━┻")
             shook_value = 0
             sleep_ms(2500)
-            open_menu()
+            #open_menu()
             startup_sequence() # Give the illusion of starting up again, since we're back from menu
 
         #break
-        continue
+        #continue
     if 2000 < mul_gforce < 2500:
         pass # TODO: Implement curious state, silent observer
     if mul_gforce >= 2500: # sudden frequent movement
@@ -93,12 +99,12 @@ while True:
         Happy_value = get_happy("reduce", Happy_value) # We're sad! Human shook us!
 
     # Touch Pins
-    capacitiveValue = touch_pin.read()
-    print("Touch Pin Capacitative Value: " + str(capacitiveValue))
+    ADCtouchValue = touch_pin.read()
+    print("Touch Pin ADC Value: " + str(ADCtouchValue))
     if headpat_val > headpat_threshold: # check if we've exceeded the headpat threshold
         print("State Happy ( ˶ˆᗜˆ˵ )")
         happy_sound()
-        sleep_ms(250)
+        sleep_ms(150)
         happy_sound()
         headpat_val = 0
         Happy_value = get_happy("add", Happy_value) # We're happy!
@@ -107,11 +113,11 @@ while True:
         if Happy_value >= 75:
             for i in range(3):
                 happy_sound() # It's really happy!
-        sleep_ms(1700)
+        sleep_ms(200)
         continue
-    if capacitiveValue < touch_threshold: # check if we've hit the threshold to count the touch
+    if ADCtouchValue > touch_threshold: # check if we've hit the threshold to count the touch
         print("Headpat detected (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
-        sleep_ms(350)
+        sleep_ms(225)
         headpat_sound()
         Happy_value = get_happy("add", Happy_value, 0.2) # We're a little happier!
         sleep_ms(250)
@@ -120,8 +126,11 @@ while True:
     print("\n")
 
     if code_debug_pin.value() == 0:  # Returns 0 when grounded
-        break # If pin 12 is not grounded, kill the loop and allow finishing execution
+        #break # If code_debug_pin is grounded, kill the loop and allow finishing execution
+        open_menu()
+        startup_sequence() # Give the illusion of starting up again, since we're back from menu
     sleep_ms(1)
 
     # Time Interval Delay in millisecond (ms)
     sleep_ms(150)
+

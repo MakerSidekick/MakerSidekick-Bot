@@ -68,9 +68,9 @@ class MPU6050(object):
         
         # Initializing the I2C method for ESP32
         # Pin assignment:
-        # SCL -> GPIO 22
+        # SCL -> GPIO 220.
         # SDA -> GPIO 21
-        self.i2c = SoftI2C(scl=Pin(22), sda=Pin(21), freq=100000)
+        self.i2c = SoftI2C(scl=Pin(5), sda=Pin(4), freq=100000)
         
         # Initializing the I2C method for ESP8266
         # Pin assignment:
@@ -236,3 +236,4 @@ class MPU6050(object):
         x=atan2(a["y"],a["z"])
         y=atan2(-a["x"],a["z"])
         return {"x": x, "y": y}
+

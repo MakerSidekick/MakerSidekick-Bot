@@ -30,25 +30,25 @@ Eventually will be able to launch user's custom code!
 Pin assignment for ESP32 and MPU6050:\
 VCC -> 3v3\
 GND -> GND\
-SCL -> GPIO 22\
-SDA -> GPIO 21
+SCL -> GPIO 5\
+SDA -> GPIO 4
 
 > [!TIP]
 > (You can change SCL pin and SDA pin in file [MPU6050.py line 73](MPU6050.py#L73))
 
 Pin assignment for ESP32 and Buzzer:\
-GPIO 32 -> Buzzer Terminal\
+GPIO 3 -> Buzzer Terminal\
 GND -> Buzzer Terminal
 > [!TIP]
 > (You can change buzzer pin in file [pin_values.py line 6](pin_values.py#L6))
 
 Pin assignment for ESP32 and Touch Pin(For registering headpats):\
-GPIO 13 -> Metal Contact
+GND --(Resistor with 220k to 560k Ohm)--> Pin A2 -> Metal Contact
 > [!TIP]
 > (You can change touch pin in file [pin_values.py line 4](pin_values.py#L4))
 
 Pin assignment for ESP32 to Debug Pin(To start code execution, for debugging):\
-GPIO 14 -> GND
+GPIO 8 -> GND
 > [!TIP]
 > (You can change enable pin in file [pin_values.py line 5](pin_values.py#L5))
 If this button is pressed in main mode, it stops execution. If it is pressed in debug mode, it exits the menu and goes back to main mode. 
