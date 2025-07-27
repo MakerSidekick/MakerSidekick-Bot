@@ -11,25 +11,58 @@ _headpat_start = None
 
 # --- Timing constants (ms) ---
 BLINK_DURATION = 140
-SHAKE_DURATION = 1400
+SHAKE_DURATION = 2000
 HEADPAT_DURATION = 1200
 SWAY_PERIOD = 1800
 
 # --- ASCII-only, single-line, horizontal faces ---
 FACES = {
-    "happy":        ["(^_^)", "("-")", "(=^.^=)"],
-    "really_happy": ["(^o^)", "(*^_^*)"],
-    "curious":      ["(o_o)", "(-_-?)", "(._.)"],
-    "concerned":    ["(>_<)", "(._.)"],
-    "sad":          ["(T_T)", "(';_;)"],
-    "sleepy":       ["(-_-)", "(u_u)"],
-    "mischief":     ["(¬‿¬)", "(^_~)"],
-    "surprised":    ["(O_O)", "(o_O)"],
-    "angry":        ["(>_<)", "(>:[)"],
-    "cool":         ["(-_-)", "(B-)"],
-    "love":         ["(^3^)", "(^.^)"],
-    "headpat":      ["(^_^)", "(^_^*)"],   # Second one gets 'blush'
-    "shake":        ["(@_@)", "(x_x)", "(O_o)"],
+    "happy": [
+        '(^_^)', '(^_^)', "('-')",  # (^_^) → (^-^)
+        "('-')", "('-')", '(^_^)',  # (^-^) → (^_^)
+    ],
+    "really_happy": [
+        '(^o^)', '(^o^)', '(*^_^*)',  # (^o^) → (*^_^*)
+        '(*^_^*)', '(*^_^*)', '(^o^)',  # (*^_^*) → (^o^)
+    ],
+    "curious": [
+        '(o_o)', '(o_o)', '(-_-?)',  # (o_o) → (-_-?)
+        '(-_-?)', '(-_-?)', '(._.)', # (-_-?) → (._.)
+        '(._.)', '(._.)', '(-_-?)',  # (._.) → (-_-?)
+        '(-_-?)', '(-_-?)', '(o_o)', # (-_-?) → (o_o)
+    ],
+    "concerned": [
+        '(>_<)', '(>_<)', '(._.)',   # (>_<) → (._.)
+        '(._.)', '(._.)', '(>_<)',   # (._.) → (>_<)
+    ],
+    "sad": [
+        '(T_T)', '(T_T)', "(;_;)",   # (T_T) → (;_;)
+    ],
+    "sleepy": [
+        '(-_-)', '(-_-)', '(u_u)',   # (-_- ) → (u_u)
+    ],
+    "mischief": [
+        '(¬‿¬)', '(¬‿¬)', '(^_~)',  # (¬‿¬) → (^_~)
+    ],
+    "surprised": [
+        '(O_O)', '(O_O)', '(o_O)',   # (O_O) → (o_O)
+    ],
+    "angry": [
+        '(>_<)', '(>_<)', '(>:[)',   # (>_<) → (>: [)
+    ],
+    "cool": [
+        '(-_-)', '(-_-)', '(B-)',    # (-_- ) → (B-)
+    ],
+    "love": [
+        '(^3^)', '(^3^)', '(^.^)',   # (^3^) → (^.^)
+    ],
+    "headpat": [
+        '(^_^)', '(^_^)', '(^_^*)',  # (^_^ ) → (^_^*)
+    ],
+    "shake": [
+        '(@_@)', '(@_@)', '(x_x)',   # (@_@) → (x_x)
+        '(x_x)', '(x_x)', '(O_o)',   # (x_x) → (O_o)
+    ],
 }
 
 def _get_blink_interval():
@@ -37,11 +70,11 @@ def _get_blink_interval():
 
 def _translate_emoji_blink(face):
     return (face
-            .replace('^', "-")
-            .replace('o', "-")
-            .replace('O', "-")
-            .replace('x', "-")
-            .replace('_', "-"))
+            .replace('^', '-')
+            .replace('o', '-')
+            .replace('O', '-')
+            .replace('x', '-')
+            .replace('_', '-'))
 
 def _draw_ascii(oled, text, x, y, scale=2):
     """Draw scaled ASCII text on oled"""
