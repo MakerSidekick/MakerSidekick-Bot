@@ -46,7 +46,7 @@ rm -rf lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
 
 Cmd/Powershell: 
 ```
-del lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
+del "lib\.gitignore" "lib\README.md" "lib\sdist_upip.py" "lib\setup.py"
 ```
 
 ### Next Steps:
