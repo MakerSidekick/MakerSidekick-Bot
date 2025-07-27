@@ -35,18 +35,23 @@ lib/.gitignore
 lib/README.md
 lib/sdist_upip.py
 lib/setup.py
+lib/.git
 ```
 
 (adjust commands for other systems/shells)
 
 Bash:
 ```bash 
-rm -rf lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
+rm -rf lib/.git lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
 ```
 
 Cmd/Powershell: 
 ```
-del "lib\.gitignore" "lib\README.md" "lib\sdist_upip.py" "lib\setup.py"
+rmdir /s /q "lib\.git"
+del "lib\.gitignore"
+del "lib\README.md"
+del "lib\sdist_upip.py"
+del "lib\setup.py"
 ```
 
 ### Next Steps:
