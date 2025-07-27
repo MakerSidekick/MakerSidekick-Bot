@@ -17,7 +17,7 @@ SWAY_PERIOD = 1800
 
 # --- ASCII-only, single-line, horizontal faces ---
 FACES = {
-    "happy":        ["(^_^)", "('-')", "(=^.^=)"],
+    "happy":        ["(^_^)", "("-")", "(=^.^=)"],
     "really_happy": ["(^o^)", "(*^_^*)"],
     "curious":      ["(o_o)", "(-_-?)", "(._.)"],
     "concerned":    ["(>_<)", "(._.)"],
@@ -29,30 +29,37 @@ FACES = {
     "cool":         ["(-_-)", "(B-)"],
     "love":         ["(^3^)", "(^.^)"],
     "headpat":      ["(^_^)", "(^_^*)"],   # Second one gets 'blush'
-    "shake":        ["(@_@)", "(x_x)", "(O_o)"]
+    "shake":        ["(@_@)", "(x_x)", "(O_o)"],
 }
 
 def _get_blink_interval():
-    # 3-6s random blink interval in ms
     return random.randint(3000, 6000)
 
 def _translate_emoji_blink(face):
     return (face
-            .replace('^', '-')
-            .replace('o', '-')
-            .replace('O', '-')
-            .replace('x', '-')
-            .replace('_', '-'))
+            .replace('^', "-")
+            .replace('o', "-")
+            .replace('O', "-")
+            .replace('x', "-")
+            .replace('_', "-"))
 
-def _draw_ascii(oled, text, x, y):
-    oled.text(text, x, y, 1)
+def _draw_ascii(oled, text, x, y, scale=2):
+    """Draw scaled ASCII text on oled"""
+    char_width = 8 * len(text)
+    char_height = 8
+    temp_buf = bytearray(char_width * char_height // 8)
+    temp_fb = framebuf.FrameBuffer(temp_buf, char_width, char_height, framebuf.MONO_VLSB)
+    temp_fb.text(text, 0, 0, 1)
+    for i in range(char_width):
+        for j in range(char_height):
+            if temp_fb.pixel(i, j):
+                oled.fill_rect(x + i*scale, y + j*scale, scale, scale, 1)
 
-def _centered_x(face):
-    w = len(face) * 8
+def _centered_x(face, scale=2):
+    w = len(face) * 8 * scale
     return max((128 - w) // 2, 0)
 
 def get_face_and_x(mood, now, anim_state):
-    # Pick face and animate X for current mood
     if mood == "happy":
         idx = (now // 2000) % len(FACES["happy"])
         face = FACES["happy"][idx]
@@ -60,7 +67,6 @@ def get_face_and_x(mood, now, anim_state):
         idx = (now // 1700) % len(FACES["really_happy"])
         face = FACES["really_happy"][idx]
     elif mood == "shake":
-        # 3 frames, rapid jerk, off-center
         phase_len = 210
         frame = ((ticks_diff(now, anim_state["start"]) // phase_len) % 3)
         face = FACES["shake"][frame]
@@ -68,7 +74,6 @@ def get_face_and_x(mood, now, anim_state):
         x = _centered_x(face) + offset_seq[frame]
         return face, x
     elif mood == "headpat":
-        # 2-frame, gentle with blush
         elapsed = ticks_diff(now, anim_state["start"])
         phase = (elapsed // 400) % 2
         face = FACES["headpat"][phase]
@@ -77,7 +82,6 @@ def get_face_and_x(mood, now, anim_state):
             face = face.replace(')', '*)', 1)
         return face, x
     else:
-        # Sway for everything else
         period = SWAY_PERIOD
         try:
             from math import sin, pi
@@ -91,7 +95,6 @@ def get_face_and_x(mood, now, anim_state):
         x = _centered_x(face) + swing
         return face, x
 
-    # Default centering
     x = _centered_x(face)
     return face, x
 
@@ -100,7 +103,6 @@ def update_oled(oled, mood="happy", value=50):
     now = ticks_ms()
     anim_state = {}
 
-    # --- Animation stateful setup ---
     if mood == "shake":
         if _shake_start is None:
             _shake_start = now
@@ -120,7 +122,6 @@ def update_oled(oled, mood="happy", value=50):
     else:
         _headpat_start = None
 
-    # --- Blinking logic (random interval, never during shake/headpat) ---
     blinkable = mood not in ("shake", "headpat")
     if _next_blink_interval is None:
         _next_blink_interval = _get_blink_interval()
@@ -133,10 +134,12 @@ def update_oled(oled, mood="happy", value=50):
             _blinking = False
 
     face, x = get_face_and_x(mood, now, anim_state)
+
     if blinkable and _blinking:
         face = _translate_emoji_blink(face)
+
     oled.fill(0)
-    _draw_ascii(oled, face, x, 27)
+    _draw_ascii(oled, face, x, 20, scale=2)
     oled.show()
 
 def demo_emotions(oled):
@@ -150,7 +153,3 @@ def demo_emotions(oled):
         for _ in range(frames):
             update_oled(oled, mood)
             sleep_ms(68)
-
-# Example usage:
-# oled_functions.update_oled(oled, "shake")
-# Call update_oled() regularly (e.g., inside your main loop or timer).
