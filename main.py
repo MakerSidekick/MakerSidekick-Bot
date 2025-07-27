@@ -13,6 +13,7 @@ from buzzer_sounds import (
 from happy_meter import meter as get_happy
 from menu import open_menu
 from pin_values import touch_pin_value, code_debug_pin_value
+import ssd1306
 import oled_functions
 
 # === OLED & I2C Initialization ===
@@ -52,20 +53,6 @@ while True:
         movement_force = mpu.read_accel_abs(g=True) * 1000
         touch_value = touch_sensor.read()
 
-        # Movement logic
-        if movement_force <= GENTLE_MOVEMENT:
-            movement_count = 0
-
-        if movement_force >= ROUGH_MOVEMENT:
-            movement_count += 1
-            if happy_level < 75:
-                angry_sound()
-                print("😠 Hey! What was that for! ヽ(｀Д´)ﾉ")
-            else:
-                curious_scared_sound()
-                print("😮 Whoa, are you taking me somewhere? (ﾟοﾟ)")
-            happy_level = get_happy("reduce", happy_level)
-
         # Shake reactions
         if movement_count >= MOVEMENT_SENSITIVITY:
             print("😵 I'm getting dizzy! (⸝⸝๑﹏๑⸝⸝)")
@@ -81,6 +68,21 @@ while True:
                 print("💔 All trust lost! I'm extremely dizzy and sad...")
                 sleep_ms(150)
                 oled_functions.update_oled(oled, "happy", 10)
+            continue
+
+        # Movement logic
+        if movement_force <= GENTLE_MOVEMENT:
+            movement_count = 0
+
+        if movement_force >= ROUGH_MOVEMENT:
+            movement_count += 1
+            if happy_level < 75:
+                angry_sound()
+                print("😠 Hey! What was that for! ヽ(｀Д´)ﾉ")
+            else:
+                curious_scared_sound()
+                print("😮 Whoa, are you taking me somewhere? (ﾟοﾟ)")
+            happy_level = get_happy("reduce", happy_level)
 
         # Touch/headpat reactions
         if touch_value > 1000:
@@ -88,6 +90,7 @@ while True:
             headpat_sound()
             happy_level = get_happy("add", happy_level, 0.2)
             headpat_count += 1
+            oled_functions.update_oled(oled, "headpat")
             sleep_ms(250)
             if headpat_count > HEADPAT_THRESHOLD:
                 print("💖 I'm so happy! ( ˶ˆᗜˆ˵ )")
