@@ -31,10 +31,10 @@ git clone https://github.com/stlehmann/micropython-ssd1306 lib/
 
 ### Cleanup to save space: 
 ```
-.gitignore
-README.md
-sdist_upip.py
-setup.py
+lib/.gitignore
+lib/README.md
+lib/sdist_upip.py
+lib/setup.py
 ```
 
 (adjust commands for other systems/shells)
