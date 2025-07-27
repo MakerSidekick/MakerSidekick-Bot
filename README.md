@@ -13,6 +13,38 @@ Future home for the project: https://github.com/sounddrill31/Social-Buddy/
 
 Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
 
+## Setup
+### Prepare this repo:
+```bash
+git clone https://github.com/MakerSidekick/MakerSidekick-Bot
+```
+
+### Enter the Folder: 
+```bash
+cd MakerSidekick-Bot
+```
+
+### Clone Libraries:
+```bash 
+git clone https://github.com/stlehmann/micropython-ssd1306 lib/
+```
+
+### Cleanup to save space: 
+```
+.gitignore
+README.md
+sdist_upip.py
+setup.py
+```
+
+(adjust commands for other systems/shells)
+
+```bash rm -rf .gitignore README.md sdist_upip.py setup.py```
+
+### Next Steps:
+- Open Folder in Thonny
+- Upload lib folder
+- Upload `.py` files
 ## Modes
 ### Normal Mode 
 <!-- Attach Pic -->
@@ -30,24 +62,26 @@ Eventually will be able to launch user's custom code!
 Pin assignment for ESP32 and MPU6050:\
 VCC -> 3v3\
 GND -> GND\
-SCL -> GPIO 5\
-SDA -> GPIO 4
+SCL -> GPIO A0\
+SDA -> GPIO A1
 
 > [!TIP]
-> (You can change SCL pin and SDA pin in file [MPU6050.py line 73](MPU6050.py#L73))
+> (You can change SCL pin and SDA pin in file [main.py line 17](main.py#L17))
 
 Pin assignment for ESP32 and Buzzer:\
-GPIO 3 -> Buzzer Terminal\
+GPIO 8 -> Buzzer Terminal\
 GND -> Buzzer Terminal
 > [!TIP]
 > (You can change buzzer pin in file [pin_values.py line 6](pin_values.py#L6))
 
+> [!WARNING]
+> Touch pin isn't working as expected :(
 Pin assignment for ESP32 and Touch Pin(For registering headpats):\
 GND --(Resistor with 220k to 560k Ohm)--> Pin A2 -> Metal Contact
 > [!TIP]
-> (You can change touch pin in file [pin_values.py line 4](pin_values.py#L4))
+> (You can change touch pin in file [pin_values.py line 4](pin_values.py#L4)) 
 
-Pin assignment for ESP32 to Debug Pin(To start code execution, for debugging):\
+Pin assignment for ESP32 to Debug Pin(<!--To start code execution-->, for debugging):\
 GPIO 8 -> GND
 > [!TIP]
 > (You can change enable pin in file [pin_values.py line 5](pin_values.py#L5))

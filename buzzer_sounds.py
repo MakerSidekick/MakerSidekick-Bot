@@ -50,17 +50,11 @@ def headpat_sound():
         play_tone(note, dur)
 
 def click_sound():
-    """
-    Redesigned: Two sharp, percussive blips separated by a brief silence.
-    """
     play_tone(3000, 20)
     time.sleep_ms(30)
     play_tone(4000, 20)
 
 def startup_sequence():
-    """
-    Redesigned: Four quick clicks, each with increasing pitch, followed by the new headpat sound.
-    """
     click_notes = [2000, 2500, 3000, 3500]
     for note in click_notes:
         play_tone(note, 15)
@@ -68,7 +62,6 @@ def startup_sequence():
     headpat_sound()
 
 def curious_scared_sound():
-
     intro_notes = [1319, 1568, 1760]
     for note in intro_notes:
         play_tone(note, 18)
