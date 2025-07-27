@@ -39,7 +39,15 @@ lib/setup.py
 
 (adjust commands for other systems/shells)
 
-```bash rm -rf .gitignore README.md sdist_upip.py setup.py```
+Bash:
+```bash 
+rm -rf lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
+```
+
+Cmd/Powershell: 
+```
+del lib/.gitignore lib/README.md lib/sdist_upip.py lib/setup.py
+```
 
 ### Next Steps:
 - Open Folder in Thonny
