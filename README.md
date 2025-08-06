@@ -9,10 +9,9 @@ Loosely inspired by tamagotchi and community-made desk toys, it will react to it
 > [!NOTE] 
 > Project state: Initial Planning/FAFO
 
-Future home for the project: https://github.com/sounddrill31/Social-Buddy/
+<!--Future home for the project: https://github.com/sounddrill31/Social-Buddy/-->
 
 Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
-
 
 ## Automatic Setup/Flash
 

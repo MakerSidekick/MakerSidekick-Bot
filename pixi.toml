@@ -20,3 +20,6 @@ scripts = ["startup_scripts/win_setup.bat"]
 [dependencies]
 python = ">=3.13.5,<3.14"
 git = ">=2.49.0,<3"
+
+[pypi-dependencies]
+mpremote = ">=1.25.0, <2"
