@@ -85,7 +85,8 @@ while True:
             happy_level = get_happy("reduce", happy_level)
 
         # Touch/headpat reactions
-        if touch_value > 1000:
+        print(f"touch value is {touch_value}")
+        if touch_value < 75:
             print("😊 Headpat detected! (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
             headpat_sound()
             happy_level = get_happy("add", happy_level, 0.2)
