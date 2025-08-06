@@ -1,5 +1,6 @@
 from machine import Pin, PWM
 import time
+import random
 
 from pin_values import buzzer_pin_value, led_pin_value
 
@@ -30,18 +31,21 @@ def happy_sound():
         play_tone(note, dur)
 
 def angry_sound():
-    notes = [1865, 1760, 1661, 1568, 1479, 1397, 1245]
-    duration_per_note = 30
+    notes = [1760, 2093, 1568, 2349, 1760, 2637, 1397, 2093]
+    duration_per_note = 15
     for note in notes:
         play_tone(note, duration_per_note)
 
 def shook_sound():
-    notes = [1568, 1245, 1568, 1319, 1568, 1175, 1568, 1319]  # G6, D#6, G6, E6, G6, D6, G6, E6
-    duration_per_note = 12
-    # Repeat the sequence twice for a trembling effect
-    for _ in range(3):
-        for note in notes:
-            play_tone(note, duration_per_note)
+    base_notes = [1568, 1245, 1568, 1319, 1568, 1175, 1568, 1319]
+    for repeat in range(3):
+        # Slightly randomize duration & pitch to make it sound more trembly
+        for note in base_notes:
+            shaky_note = note + random.randint(5, 15)  # slight pitch variation
+            shaky_duration = random.randint(10, 15)      # jittery timing
+            play_tone(shaky_note, shaky_duration)
+        # stutter pause between repeats
+        time.sleep_ms(20)
 
 def headpat_sound():
     notes = [1175, 1397, 1760, 2093, 2637]  # D6, F6, A6, C7, E7
@@ -50,17 +54,11 @@ def headpat_sound():
         play_tone(note, dur)
 
 def click_sound():
-    """
-    Redesigned: Two sharp, percussive blips separated by a brief silence.
-    """
     play_tone(3000, 20)
     time.sleep_ms(30)
     play_tone(4000, 20)
 
 def startup_sequence():
-    """
-    Redesigned: Four quick clicks, each with increasing pitch, followed by the new headpat sound.
-    """
     click_notes = [2000, 2500, 3000, 3500]
     for note in click_notes:
         play_tone(note, 15)
@@ -68,7 +66,6 @@ def startup_sequence():
     headpat_sound()
 
 def curious_scared_sound():
-
     intro_notes = [1319, 1568, 1760]
     for note in intro_notes:
         play_tone(note, 18)

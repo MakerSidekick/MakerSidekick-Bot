@@ -70,7 +70,15 @@ class MPU6050(object):
         # Pin assignment:
         # SCL -> GPIO 220.
         # SDA -> GPIO 21
-        self.i2c = SoftI2C(scl=Pin(5), sda=Pin(4), freq=100000)
+        #self.i2c = SoftI2C(scl=Pin(0), sda=Pin(1), freq=100000)
+        
+        # Try to use existing bus
+        if bus is None:
+            # Fallback: create new SoftI2C if not given
+            from machine import SoftI2C, Pin
+            self.i2c = SoftI2C(scl=Pin(0), sda=Pin(1), freq=100000)
+        else:
+            self.i2c = bus
         
         # Initializing the I2C method for ESP8266
         # Pin assignment:
