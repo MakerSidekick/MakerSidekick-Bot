@@ -26,11 +26,6 @@ git clone https://github.com/MakerSidekick/MakerSidekick-Bot
 cd MakerSidekick-Bot
 ```
 
-### Clone Libraries:
-```bash 
-git clone https://github.com/stlehmann/micropython-ssd1306 lib/
-```
-
 ### Setup Prerequisites:
 Install `pixi` tool from the official link: https://pixi.sh/latest/#installation
 
