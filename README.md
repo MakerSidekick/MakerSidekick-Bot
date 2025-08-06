@@ -13,7 +13,54 @@ Future home for the project: https://github.com/sounddrill31/Social-Buddy/
 
 Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
 
-## Setup
+
+## Automatic Setup/Flash
+
+### Prepare this repo:
+```bash
+git clone https://github.com/MakerSidekick/MakerSidekick-Bot
+```
+
+### Enter the Folder: 
+```bash
+cd MakerSidekick-Bot
+```
+
+### Clone Libraries:
+```bash 
+git clone https://github.com/stlehmann/micropython-ssd1306 lib/
+```
+
+### Setup Prerequisites:
+Install `pixi` tool from the official link: https://pixi.sh/latest/#installation
+
+Easy Setup Commands(Subject to change)
+- Linux/MacOS (Close and Reopen shell after it's done installing)
+    ```bash
+    curl -fsSL https://pixi.sh/install.sh | sh
+    ```
+- Windows
+    ```cmd
+    powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
+    ```
+
+    OR
+
+    Releases(has installer packages): https://github.com/prefix-dev/pixi/releases/latest
+
+    x86_64 Installer: https://github.com/prefix-dev/pixi/releases/latest/download/pixi-x86_64-pc-windows-msvc.msi
+
+### Setup Environment:
+```bash
+pixi install
+```
+### Upload:
+```bash
+pixi run upload
+```
+
+## Manual Setup/Flash
+
 ### Prepare this repo:
 ```bash
 git clone https://github.com/MakerSidekick/MakerSidekick-Bot
@@ -55,9 +102,13 @@ del "lib\setup.py"
 ```
 
 ### Next Steps:
+> [!TIP]
+> Automating this with mpremote would be prudent. Check out upload-to-esp32.py in this folder.
+
 - Open Folder in Thonny
 - Upload lib folder
 - Upload `.py` files
+
 ## Modes
 ### Normal Mode 
 <!-- Attach Pic -->

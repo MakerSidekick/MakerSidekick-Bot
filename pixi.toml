@@ -1,0 +1,22 @@
+[workspace]
+authors = ["sounddrill31 <84176052+sounddrill31@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "MakerSidekick-Bot"
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+dev = "python upload-to-esp32.py dev"
+upload = "python upload-to-esp32.py upload"
+list = "python upload-to-esp32.py list"
+
+[activation]
+scripts = ["startup_scripts/linux_setup.sh"]
+
+[target.win-64.activation]
+# Overwrite activation scripts only for windows
+scripts = ["startup_scripts/win_setup.bat"]
+
+[dependencies]
+python = ">=3.13.5,<3.14"
+git = ">=2.49.0,<3"
