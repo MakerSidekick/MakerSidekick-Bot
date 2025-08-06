@@ -11,7 +11,7 @@ Loosely inspired by tamagotchi and community-made desk toys, it will react to it
 
 <!--Future home for the project: https://github.com/sounddrill31/Social-Buddy/-->
 
-Project Code: https://github.com/MakerSidekick/MakerSidekick-Bot
+Project Code: https://github.com/MakerSidekick/code
 
 ## Automatic Setup/Flash
 
