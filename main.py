@@ -51,7 +51,7 @@ while True:
         # Read all sensors
         acceleration = mpu.read_accel_data()
         movement_force = mpu.read_accel_abs(g=True) * 1000
-        touch_value = touch_sensor.read()
+        touch_value = touch_sensor.read() * 100
 
         # Shake reactions
         if movement_count >= MOVEMENT_SENSITIVITY:
@@ -85,7 +85,7 @@ while True:
             happy_level = get_happy("reduce", happy_level)
 
         # Touch/headpat reactions
-        if touch_value < 75:
+        if touch_value < 12500:
             print("😊 Headpat detected! (っ´ω`)ﾉ(˵•́ ᴗ •̀˵)")
             headpat_sound()
             happy_level = get_happy("add", happy_level, 0.2)

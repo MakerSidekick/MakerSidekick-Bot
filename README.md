@@ -88,9 +88,12 @@ GND -> Buzzer Terminal
 > (You can change buzzer pin in file [pin_values.py line 6](pin_values.py#L6))
 
 > [!WARNING]
-> Touch pin isn't working as expected :(
+> Touch pin isn't working as expected :( 
+    It works as a touch pin but it's not super good at sensing values, especially when the device is far-ish away! 
+
 Pin assignment for ESP32 and Touch Pin(For registering headpats):\
 GND --(Resistor with 220k to 560k Ohm)--> Pin A2 -> Metal Contact
+
 > [!TIP]
 > (You can change touch pin in file [pin_values.py line 4](pin_values.py#L4)) 
 
